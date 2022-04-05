@@ -1,17 +1,24 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { actionExpenses } from '../actions';
+import handleSum from '../services/soma';
+import getCurrency from '../services/currencyAPI';
+
+const initialTag = 'Alimentação';
 
 class Form extends React.Component {
   constructor() {
     super();
 
     this.state = {
+      id: -1,
       value: 0,
       description: '',
-      moeda: '',
-      method: '',
-      tag: '',
+      currency: 'USD',
+      method: 'Dinheiro',
+      tag: initialTag,
+      exchangeRates: {},
     };
   }
 
@@ -20,8 +27,34 @@ class Form extends React.Component {
     this.setState({ [name]: value });
   }
 
+  fetchApi = async () => {
+    const api = await getCurrency();
+    delete api.USDT;
+    return api;
+  }
+
+  handleAddBtn = async (event) => {
+    event.preventDefault();
+    const { getExpenses, expenses } = this.props;
+
+    this.setState((prevState) => ({ id: prevState.id + 1 }));
+    this.setState({ exchangeRates: await this.fetchApi() });
+
+    await getExpenses(this.state);
+
+    handleSum(expenses);
+
+    this.setState({
+      value: 0,
+      description: '',
+      currency: 'USD',
+      method: 'Dinheiro',
+      tag: initialTag,
+    });
+  }
+
   render() {
-    const { value, description, moeda, method, tag } = this.state;
+    const { value, description, currency, method, tag } = this.state;
     const { currencies } = this.props;
     return (
       <form>
@@ -52,13 +85,14 @@ class Form extends React.Component {
           <select
             data-testid="currency-input"
             id="currency"
-            name="moeda"
+            name="currency"
+            value={ currency }
             onChange={ this.handleIputs }
-            value={ moeda }
           >
-            { currencies.map((currency) => (
-              <option key={ currency }>{ currency }</option>
-            )) }
+            { currencies.map((moeda) => (
+              <option key={ moeda }>
+                { moeda }
+              </option>)) }
           </select>
         </label>
         <label htmlFor="method">
@@ -67,11 +101,12 @@ class Form extends React.Component {
             data-testid="method-input"
             id="method"
             name="method"
+            value={ method }
             onChange={ this.handleIputs }
           >
-            <option value={ method }>Dinheiro</option>
-            <option value={ method }>Cartão de crédito</option>
-            <option value={ method }>Cartão de débito</option>
+            <option>Dinheiro</option>
+            <option>Cartão de crédito</option>
+            <option>Cartão de débito</option>
           </select>
         </label>
         <label htmlFor="categoria">
@@ -80,15 +115,17 @@ class Form extends React.Component {
             data-testid="tag-input"
             id="categoria"
             name="tag"
+            value={ tag }
             onChange={ this.handleIputs }
           >
-            <option value={ tag }>Alimentação</option>
-            <option value={ tag }>Lazer</option>
-            <option value={ tag }>Trabalho</option>
-            <option value={ tag }>Transporte</option>
-            <option value={ tag }>Saúde</option>
+            <option>Alimentação</option>
+            <option>Lazer</option>
+            <option>Trabalho</option>
+            <option>Transporte</option>
+            <option>Saúde</option>
           </select>
         </label>
+        <button type="button" onClick={ this.handleAddBtn }>Adicionar despesa</button>
       </form>
     );
   }
@@ -96,10 +133,19 @@ class Form extends React.Component {
 
 const mapStateToProps = (state) => ({
   currencies: state.wallet.currencies,
+  expenses: state.wallet.expenses,
 });
 
-export default connect(mapStateToProps)(Form);
+const mapDispatchToProps = (dispatch) => ({
+  getExpenses: (expenses) => dispatch(actionExpenses(expenses)),
+  // getExchangeRates: (payload) => dispatch(actionExchangeRate(payload)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Form);
 
 Form.propTypes = {
   currencies: PropTypes.arrayOf(Object).isRequired,
+  expenses: PropTypes.arrayOf(Object).isRequired,
+  getExpenses: PropTypes.func.isRequired,
+  // getExchangeRates: PropTypes.func.isRequired,
 };
