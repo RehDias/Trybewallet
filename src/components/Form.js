@@ -138,7 +138,6 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   getExpenses: (expenses) => dispatch(actionExpenses(expenses)),
-  // getExchangeRates: (payload) => dispatch(actionExchangeRate(payload)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Form);
@@ -147,5 +146,4 @@ Form.propTypes = {
   currencies: PropTypes.arrayOf(Object).isRequired,
   expenses: PropTypes.arrayOf(Object).isRequired,
   getExpenses: PropTypes.func.isRequired,
-  // getExchangeRates: PropTypes.func.isRequired,
 };

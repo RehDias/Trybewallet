@@ -4,21 +4,11 @@ import PropTypes from 'prop-types';
 import handleSum from '../services/soma';
 
 class Header extends React.Component {
-  // constructor() {
-  //   super();
-
-  //   this.state = {
-  //     expenses: 0,
-  //   };
-  // }
-
   render() {
     const { email, expenses } = this.props;
-    // const { expenses } = this.props;
-    // console.log(expenses);
 
     const total = handleSum(expenses);
-    console.log(total);
+
     return (
       <header>
         <p data-testid="email-field">{ email }</p>
