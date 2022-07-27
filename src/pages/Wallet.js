@@ -5,6 +5,7 @@ import Header from '../components/Header';
 import Form from '../components/Form';
 import Table from '../components/table';
 import { actionFectchCurrency } from '../actions';
+import styles from './Wallet.module.css';
 
 class Wallet extends React.Component {
   async componentDidMount() {
@@ -15,11 +16,11 @@ class Wallet extends React.Component {
 
   render() {
     return (
-      <>
+      <main className={ styles.main }>
         <Header />
         <Form />
         <Table />
-      </>
+      </main>
     );
   }
 }

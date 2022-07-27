@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import handleSum from '../services/soma';
+import styles from '../pages/Wallet.module.css';
 
 class Header extends React.Component {
   render() {
@@ -10,9 +11,9 @@ class Header extends React.Component {
     const total = handleSum(expenses);
 
     return (
-      <header>
+      <header className={ styles.header }>
         <p data-testid="email-field">{ email }</p>
-        <div>
+        <div className={ styles.total }>
           <p data-testid="total-field">{ total }</p>
           <p data-testid="header-currency-field">BRL</p>
         </div>

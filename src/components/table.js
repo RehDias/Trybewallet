@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { actionDelete } from '../actions';
+import styles from '../pages/Wallet.module.css';
 
 class Table extends React.Component {
   handleDeleteBtn = async (event) => {
@@ -16,7 +17,7 @@ class Table extends React.Component {
     const { expenses } = this.props;
 
     return (
-      <table>
+      <table className={ styles.table }>
         <thead>
           <tr>
             <th>Descrição</th>
@@ -49,11 +50,21 @@ class Table extends React.Component {
                 <td>
                   <button
                     type="button"
+                    data-testid="edit-btn"
+                    className={ styles.btn_edit }
+                    value={ id }
+                    onClick={ this.handleEditBtn }
+                  >
+                    Editar
+                  </button>
+                  <button
+                    type="button"
+                    className={ styles.btn_remove }
                     data-testid="delete-btn"
                     value={ id }
                     onClick={ this.handleDeleteBtn }
                   >
-                    Delete
+                    Deletar
                   </button>
                 </td>
               </tr>

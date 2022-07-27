@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { actionExpenses } from '../actions';
 import handleSum from '../services/soma';
 import getCurrency from '../services/currencyAPI';
+import styles from '../pages/Wallet.module.css';
 
 const initialTag = 'Alimentação';
 
@@ -57,12 +58,13 @@ class Form extends React.Component {
     const { value, description, currency, method, tag } = this.state;
     const { currencies } = this.props;
     return (
-      <form>
+      <form className={ styles.forms }>
         <label htmlFor="valor">
           Valor
           <input
             type="number"
             data-testid="value-input"
+            className={ styles.input_value }
             id="valor"
             name="value"
             value={ value }
@@ -74,6 +76,7 @@ class Form extends React.Component {
           <input
             type="text"
             data-testid="description-input"
+            className={ styles.input_description }
             id="descrição"
             name="description"
             value={ description }
@@ -125,7 +128,13 @@ class Form extends React.Component {
             <option>Saúde</option>
           </select>
         </label>
-        <button type="button" onClick={ this.handleAddBtn }>Adicionar despesa</button>
+        <button
+          type="button"
+          onClick={ this.handleAddBtn }
+          className={ styles.btn }
+        >
+          Adicionar despesa
+        </button>
       </form>
     );
   }
