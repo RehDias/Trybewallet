@@ -2,7 +2,7 @@
 
 <h2>Sobre</h2>
 
-<p>Neste projeto foi desenvolvido uma carteira de controle de gastos com coversor de moedas onde poderá visualizar uma tabela com os gastos e suas descrições, editar ou remover os gastos e consultar o valor total convertido. Ao iniciar a aplicação precisará efetuar um login  onde irá inserir um e-mail e senha, o e-mail precisa ser no formato correto de e-mail e a senha tem que ter no mínimo 6 digitos, após o login será redirecionado para a página de carteira onde poderá acrescentar, remover e consultar seus gastos.</p> 
+<p>Neste projeto foi desenvolvido uma carteira de controle de gastos com coversor de moedas onde poderá visualizar uma tabela com os gastos e suas descrições, editar, remover e consultar o valor total convertido. Ao iniciar a aplicação precisará efetuar um login  onde irá inserir um e-mail e senha, o e-mail precisa ser no formato correto de e-mail e a senha tem que ter no mínimo 6 digitos, após o login será redirecionado para a página de carteira onde poderá acrescentar, remover e consultar seus gastos.</p> 
 
 <h3>Tecnologias utilizadas</h3>
 
