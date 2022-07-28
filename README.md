@@ -8,10 +8,6 @@
 
 <p>Essa aplicação é em React e utiliza Redux como ferramenta de manipulação de estado.</p>
 
-<h3>Como executar o projeto</h3>
-
-<p>Ao fazer o clone deste repositório na sua máquina, na pasta onde esta o projeto, precisa executar o comando no terminal: npm install. Para abrir a aplicação: npm start.</p>
-
 <h3>Aplicação</h3>
 
 ![aplicação-Trybewallet](https://user-images.githubusercontent.com/91297277/181312851-bbd89773-ee77-4fe0-a373-c263e0a64eeb.gif)
